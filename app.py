@@ -37,3 +37,6 @@ def index():
 @app.route('/path/<playlistID>', methods = ['GET'])
 def path_index():
     return app.send_static_file('index.html')
+
+if __name__ == '__main__':
+    app.run(threaded=True, port=5000)
