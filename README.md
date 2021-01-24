@@ -3,8 +3,8 @@
 ## At QHacks 2021
 Quickly construct a custom power hour video connecting to your Spotify account. Perfect to get any Friday or Saturday night started.
 
-![HoverFlow Navigation in action!](./img/img4.png)
-
+![Power Hour Buddy in action!](./img/img6.png)
+![Power Hour Buddy in action!](./img/img7.png)
 
 ## Goal of this work
 To build a playlist connected with Spotify and quickly produce a custom power hour video.
@@ -38,12 +38,15 @@ Create a custom playlist with
 
 ## Gallery
 
-![Products Page](./img/img1.png)
+![Spotify authentication](./img/img1.png)
 
-![A Shopping Cart](./img/img2.png)
+![Create playlist from popular songs](./img/img2.png)
 
-![Handsfree Js Detection](./img/img3.png)
+![Create playlist from personalized songs](./img/img3.png)
 
+![Create power hour video from existing playlist](./img/img4.png)
+
+![Create playlist from genre specific songs](./img/img5.png)
 
 ## Development Notes
 
