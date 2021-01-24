@@ -56,7 +56,47 @@
 }
 
 .play-btn {
-  position: absolute !important;
+  position: fixed !important;
   bottom: 50px;
   right: 50px;
+}
+
+.player-wrapper {
+  position: relative;
+  padding-top: 35% /* Player ratio: 100 / (1280 / 720) */
+}
+
+.react-player {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.player-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.player-play-btn {
+  position: absolute !important;
+  left: 0;
+  right: 0;
+  margin: auto !important;
+  top: 40%;
+}
+
+.use-playlist {
+  &-div {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+    margin-right: 20px;
+  }
+  &-chip {
+    margin: 0 8px;
+    cursor: pointer;
+  }
 }
