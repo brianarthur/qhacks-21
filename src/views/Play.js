@@ -17,7 +17,7 @@ import { spotifyPlaylistUrl, playPlaylistUrl } from '../utils/constants';
 import audio from '../subtleAirhorn.mp3';
 
 const Play = ({ token }) => {
-    const [count, setCount] = useState(1);
+    const [count, setCount] = useState(0);
     const [startedPlaying, setStartedPlaying] = useState(false);
     const [playButton, setPlayButton] = useState(false);
     const [playAudio, setPlayAudio] = useState(false);

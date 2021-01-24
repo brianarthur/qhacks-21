@@ -9,6 +9,8 @@ import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
+import spotifyImg from '../spotify.png';
+
 import { login } from '../store/actions/tracks';
 import { spotifyAuthenticateUrl } from '../utils/constants';
 
@@ -19,10 +21,15 @@ const AuthenticateView = ({ token, login }) => {
   const parsedRedirect = queryString.parse(location.search);
   const redirectUrl = parsedRedirect.r ? parsedRedirect.r : '/';
 
+  const authUrl = `${spotifyAuthenticateUrl}&state=${redirectUrl}`;
+
   useEffect(() => {
+    console.log(parsedHash);
     if (parsedHash.access_token) {
       login(parsedHash.access_token);
-      
+      if (parsedHash.state) {
+        history.push(parsedHash.state);
+      }
     }
   }, []);
 
@@ -36,13 +43,14 @@ const AuthenticateView = ({ token, login }) => {
     <div className="not-authenticated">
       <Card className="not-authenticated-card">
         <CardContent>
-          <Typography gutterBottom variant="h5">
-            Not authenticated with Spotify.
+          <img src={spotifyImg} />
+          <Typography gutterBottom variant="h6">
+            Authenticate with Spotify to continue.
           </Typography>
         </CardContent>
         <CardContent className="not-authenticated-card-btn">
           <CardActions>
-            <Button size="small" color="primary" href={spotifyAuthenticateUrl}>
+            <Button size="small" color="primary" href={authUrl}>
               Authenticate
             </Button>
           </CardActions>
