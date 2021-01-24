@@ -1,4 +1,4 @@
-import { TRACK_ADD, TRACK_REMOVE, AUTH_SUCCESS, AUTH_LOGOUT } from '../actions/actionTypes';
+import { TRACK_ADD, TRACK_REMOVE, AUTH_SUCCESS, AUTH_FAIL, AUTH_LOGOUT } from '../actions/actionTypes';
 
 export const tracksAdd = data => {
 	return {
@@ -18,6 +18,12 @@ export const authSuccess = token => {
 	return {
 		type: AUTH_SUCCESS,
 		token
+	};
+}
+
+export const authFail = () => {
+	return {
+		type: AUTH_FAIL,
 	};
 }
 
@@ -62,10 +68,10 @@ export const autoLogin = () => {
 		} else {
 			const expirationDate = new Date(localStorage.getItem("expirationDate"));
 			if (expirationDate <= new Date()) {
-			dispatch(logout());
+				dispatch(logout());
 			} else {
-			dispatch(authSuccess(token));
-			dispatch(checkAuthTimeout((expirationDate.getTime() - new Date().getTime()) / 1000));
+				dispatch(authSuccess(token));
+				dispatch(checkAuthTimeout((expirationDate.getTime() - new Date().getTime()) / 1000));
 			}
 		}
 	};

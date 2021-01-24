@@ -2,7 +2,7 @@
 const baseUrl = "https://accounts.spotify.com/authorize";
 const clientID = "0413ac0616dc44fb99939db92ba465f3";
 let redirect = process.env.REACT_APP_REDIRECT;
-if (!redirect) redirect = "http://localhost:3000/";
+if (!redirect) redirect = "http://localhost:3000/auth/";
 const scopes = ["playlist-modify-public", "user-read-private", "user-top-read"];
 export const spotifyAuthenticateUrl = `${baseUrl}?client_id=${clientID}&response_type=token&redirect_uri=${redirect}&scope=${scopes.join("%20")}`;
 

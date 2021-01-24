@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { backendAxios } from '../utils/axiosUtil';
 import { useHistory } from "react-router-dom";
 import { connect } from 'react-redux';
-import { tracksAdd, tracksRemove, login } from '../store/actions/tracks';
+import { tracksAdd, tracksRemove } from '../store/actions/tracks';
 
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -34,7 +34,7 @@ import { generateUrl } from '../utils/constants';
 
 import { PopularSongsTabView, PersonalTabView, PersonalPlaylistTabView, GenreTabView } from './TabViews';
 
-const Home = ({ token, tracks, tracksAdd, tracksRemove, login }) => {
+const Home = ({ token, tracks, tracksAdd, tracksRemove }) => {
   const [tab, setTab] = useState(0);
   const [data, setData] = useState([]);
   const history = useHistory();
@@ -189,6 +189,6 @@ const mapStateToProps = ({token, tracks}) => {
   }
 }
 
-const mapDispatchToProps = { tracksAdd, tracksRemove, login };
+const mapDispatchToProps = { tracksAdd, tracksRemove };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

@@ -34,8 +34,8 @@ def get_urls(playlistID):
 def index():
     return app.send_static_file('index.html')
 
-@app.route('/path/<playlistID>', methods = ['GET'])
-def path_index():
+@app.errorhandler(404)
+def not_found(e):
     return app.send_static_file('index.html')
 
 if __name__ == '__main__':

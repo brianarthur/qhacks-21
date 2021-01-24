@@ -1,19 +1,10 @@
-import { TRACK_ADD, TRACK_REMOVE, AUTH_SUCCESS, AUTH_LOGOUT } from '../actions/actionTypes';
+import { TRACK_ADD, TRACK_REMOVE, AUTH_SUCCESS, AUTH_FAIL, AUTH_LOGOUT } from '../actions/actionTypes';
 import { updateObject } from '../utility';
 
 const initialState = {
     tracks: [],
-    // play: null,
     token: null,
-    play: {
-        playlistID: "7CwiEEV7ALUvnulFfOZOCi",
-        tracks: {
-            "0JGncW3IHWA9TFQyhgLESH": "https://www.youtube.com/embed/VqjkxWb68Bg?start=93s&end=153",
-            "0eBXyY4SatzpE7opnzgXvz": "https://www.youtube.com/embed/MS82JAkBkDY?start=121s&end=181",
-            "0nbXyq5TXYPCO7pr3N8S4I": "https://www.youtube.com/embed/UNZqm3dxd2w?start=124s&end=184",
-            "1MOOJuxUu9QiQE9GgkYYPb": "https://www.youtube.com/embed/lYaVNFHcpuQ?start=73s&end=133"
-        }
-    }
+    attemptedLogin: false,
 }
 
 const trackAdd = (state, action) => {
@@ -41,12 +32,21 @@ const trackRemove = (state, action) => {
 const authSuccess = (state, action) => {
     return updateObject(state, {
         token: action.token,
+        attemptedLogin: true,
+    });
+}
+
+const authFail = (state) => {
+    return updateObject(state, {
+        token: null,
+        attemptedLogin: true,
     });
 }
 
 const authLogout = (state) => {
     return updateObject(state, {
         token: null,
+        attemptedLogin: true,
     });
 }
 
@@ -58,6 +58,8 @@ const reducer = (state = initialState, action) => {
             return trackRemove(state, action);
         case AUTH_SUCCESS:
             return authSuccess(state, action);
+        case AUTH_FAIL:
+            return authFail(state);
         case AUTH_LOGOUT:
             return authLogout(state);
         default:
