@@ -98,11 +98,8 @@ class getMusic():
     def searchForSong(self, name):
         videos = VideosSearch(name, limit=1)
         duration = videos.result()['result'][0]['duration']
-        print(duration)
         seconds = int(duration.split(':')[0])*60 + int(duration.split(':')[1])
-        print(seconds)
         startTime = int(np.random.normal(seconds/2 - 30, seconds/4))
-        print(startTime)
         if seconds - startTime < 60:
             startTime = seconds - 65
         videoId = videos.result()['result'][0]['id']

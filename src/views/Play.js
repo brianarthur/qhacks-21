@@ -17,7 +17,7 @@ import { spotifyPlaylistUrl, playPlaylistUrl } from '../utils/constants';
 import audio from '../subtleAirhorn.mp3';
 
 const Play = ({ token }) => {
-    const [count, setCount] = useState(0);
+    const [count, setCount] = useState(59);
     const [startedPlaying, setStartedPlaying] = useState(false);
     const [playButton, setPlayButton] = useState(false);
     const [playAudio, setPlayAudio] = useState(false);
@@ -32,7 +32,7 @@ const Play = ({ token }) => {
                 "token": token,
             });
             spotifyAxios
-                .get(spotifyPlaylistUrl(playlistId))
+                .get(spotifyPlaylistUrl(playlistId), {params: {limit: 60}})
                 .then(({data}) => setPlaylist(parsePlaylist(data.items)))
                 .catch(err => console.log(err));
             backendAxios
@@ -77,7 +77,7 @@ const Play = ({ token }) => {
         return (
             <Box p={3}>
                 <Typography variant="h4">Thanks for watching. Click <Link to="/">here</Link> to create new playlist.</Typography>
-                <Typography variant="h4">Click <a href="#" onClick={handleRewatch}>here</a> to rewatch.</Typography>
+                <Typography variant="h4">Click <button className="link-button" onClick={handleRewatch}>here</button> to rewatch.</Typography>
             </Box>
         );
     }
