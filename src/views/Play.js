@@ -47,6 +47,13 @@ const Play = ({ token }) => {
         setPlayButton(true);
     }
 
+    const handleShuffle = () => {
+        const p = [...playlist];
+        p.sort(() => Math.random() - 0.5);
+        setPlaylist(p);
+        handleStart();
+    }
+
     const handleTransition = () => {
         if (startedPlaying) {
             setCount(count + 1);
@@ -87,7 +94,16 @@ const Play = ({ token }) => {
 
     return (
         <>
-            {!playButton && <Button className="player-play-btn" size="large" variant="contained" color="secondary" onClick={handleStart}>Play Power Hour</Button>}
+            {!playButton && 
+                <div className="player-play-div">
+                    <Button className="player-play-btn" size="large" variant="contained" color="secondary" onClick={handleStart}>
+                        Play Power Hour
+                    </Button>
+                    <Button className="player-play-btn" size="large" variant="contained" color="secondary" onClick={handleShuffle}>
+                        Shuffle Power Hour
+                    </Button>
+                </div>
+            }
             {playButton && 
                 <>
                     <Box p={3}>

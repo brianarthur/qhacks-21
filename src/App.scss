@@ -80,12 +80,19 @@
   align-items: center;
 }
 
-.player-play-btn {
-  position: absolute !important;
-  left: 0;
-  right: 0;
-  margin: auto !important;
-  top: 40%;
+.player-play {
+  &-div {
+    position: absolute !important;
+    left: 0;
+    right: 0;
+    margin: auto !important;
+    top: 40%;
+    display: flex;
+    justify-content: center;
+  }
+  &-btn {
+    margin: 16px !important;
+  }
 }
 
 .use-playlist {
