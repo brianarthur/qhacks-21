@@ -46,16 +46,20 @@ class getMusic():
     def populatePlaylist(self, playlistID):
         #find playlist items
         playlistLength = len(self.sp.playlist_items(playlistID, limit=60)['items'])
+        seedList = []
+        for title in self.sp.playlist_items(playlistID, limit=60)['items']:
+            seedList.append(title['track']['id'])
+
 
         while playlistLength < 60:
             items = self.sp.playlist_items(playlistID, limit=60)['items']
             songList = []
             for song in items:
                 songList.append(song['track']['id'])
-            if len(songList) >= 5:
-                pickSeed = random.sample(songList, 5)
+            if len(seedList) >= 5:
+                pickSeed = random.sample(seedList, 5)
             else:
-                pickSeed = songList
+                pickSeed = seedList
             songRecommendation = self.sp.recommendations(seed_tracks=pickSeed, limit=10)['tracks']
             newSongs = []
             breakBool = False
@@ -96,7 +100,7 @@ class getMusic():
         return bigD
     
     def searchForSong(self, name):
-        videos = VideosSearch(name, limit=1)
+        videos = VideosSearch(name + ' music video', limit=10)
         duration = videos.result()['result'][0]['duration']
         seconds = int(duration.split(':')[0])*60 + int(duration.split(':')[1])
         startTime = int(np.random.normal(seconds/2 - 30, seconds/4))
@@ -111,5 +115,5 @@ if __name__ == '__main__':
     # music = getMusic('BQDf-E7Mn_-_tjPzWtV66okJ7tm1VjXdoTlM9-4WbxYuAcPlAumcT7XtW9yjDBF89YOQgjOz0-vTD8QhpA9tl-J1CP8UklHbSNHMBx4qMURz1bbDzFFGjXlBTSxfwS0OKbO8FZ1L7ygpX3b4zkIJ8W9PZjbO6t0zc5QZgfg5MzFwXaTwnYW4KIT8YUrlYpzFsXbJ7ko6LL2cN4ln9a4')
     # songDict = music.populateSonglist(['2r6OAV3WsYtXuXjvJ1lIDi', '4DuUwzP4ALMqpquHU0ltAB', '5SWnsxjhdcEDc7LJjq9UHk'])
     # print(music.findYoutubeURLs(songDict))
-    music = getMusic('BQDVAEEHPYh7ytlhMcTB6BAFJkK3w6VWhLMIjCEwGC1nNFqzQVe2JW4gzap1hTkl4w77XA-gHxtkN9THemmmONHhNKvqmqJlrDr54ZqDNb9EoOoM_l3PgmzxKlEk4gXtlF1IrX9TNjxBNpH3Z2UpbsbOVsON9v91vvGmNB43Oh5lHPjKHuIxRoXAYzhgv5Y')
-    music.searchForSong(name="WAP Cardi B Megan Three Stallion")
+    music = getMusic('BQD6Yt34-21GUDdK17JaUYV-Zt1zAmK91Xq0NcIxDh-F3HijIVaajCHoMwGVg_eatwOAys2kpZoabbbf0_cVoaig2v_5_hzjZxM8jWnaRA3VSQ1RXWijz7D7XCHk1v7J9DGHLElw3RwOcUjbGk3AYK6Jof6Hum3RO8EuQbS1eVmpnAFOHkLYf0TQ8CSmkPa6MSBt7BwpgqYotPgFxYs')
+    print(music.searchForSong(name="WAP Cardi B Megan Three Stallion"))
