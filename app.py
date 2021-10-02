@@ -24,7 +24,7 @@ def get_urls(playlistID):
     token = request.json['token']
     try:
         music = getMusic(token)
-        return music.generateYoutubeURLs(playlistID)
+        return music.generateWithThreading(playlistID)
     except Exception as e:
         print(e)
         return "ERROR in getURLs"
